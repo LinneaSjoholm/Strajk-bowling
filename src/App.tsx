@@ -1,10 +1,10 @@
 import React from 'react';
+import Routes from './backend/routes/routes';
 
-const App: React.FC = () => {
+const App = () => {
   return (
-    <div>
-      <h1>Hello, Strajk Bowling!</h1>
-      <p>Welcome to the bowling reservation system.</p>
+    <div className="App">
+      <Routes />
     </div>
   );
 }

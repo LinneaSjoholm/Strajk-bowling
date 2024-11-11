@@ -8,7 +8,11 @@
     "strict": true,
     "skipLibCheck": true,
     "forceConsistentCasingInFileNames": true,
-    "rootDir": "./src"
+    "moduleResolution": "node",
+    "baseUrl": "./src",  // Optional if you have an SRC directory
+    "paths": {
+      "*": ["node_modules/*"]
+    }
   },
   "include": ["src/**/*"],
   "exclude": ["node_modules"]
