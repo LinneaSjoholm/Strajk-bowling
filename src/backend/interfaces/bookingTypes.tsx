@@ -12,6 +12,7 @@ interface BookingResponse {
     people: number;
     shoes: number[];
     price: number;
+    active: true;
 }
 
 export { BookingRequest, BookingResponse };
