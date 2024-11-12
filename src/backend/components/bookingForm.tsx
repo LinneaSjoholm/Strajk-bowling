@@ -6,6 +6,7 @@ import generateBookingId from "./bookingId";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import validateBooking from "../services/validation";
+import { isFutureDateTime, getMinDate, getMinTime } from "../services/dateTimeValidation";
 
 const BookingForm = ({ onSubmit }: { onSubmit: (bookingData: BookingResponse) => void }) => {
     const [date, setDate] = useState<string>('');
@@ -17,6 +18,12 @@ const BookingForm = ({ onSubmit }: { onSubmit: (bookingData: BookingResponse) =>
     const navigate = useNavigate();
 
     const handleSubmit = () => {
+
+        if(!isFutureDateTime(date, time)) {
+            alert("Please select a future date and time.");
+            return;
+        }
+
         const bookingData: BookingRequest = {
             when: `${date}T${time}`,
             lanes: lanes!,
@@ -48,6 +55,7 @@ const BookingForm = ({ onSubmit }: { onSubmit: (bookingData: BookingResponse) =>
                 type="date"
                 value={date}
                 onChange={(e) => setDate(e.target.value)}
+                min={getMinDate()}
             />
 
             <label htmlFor="time">Time</label>
@@ -55,6 +63,7 @@ const BookingForm = ({ onSubmit }: { onSubmit: (bookingData: BookingResponse) =>
                 type="time"
                 value={time}
                 onChange={(e) => setTime(e.target.value)}
+                min={getMinTime()}
             />
 
             <label htmlFor="lanes">Lanes</label>
@@ -71,7 +80,7 @@ const BookingForm = ({ onSubmit }: { onSubmit: (bookingData: BookingResponse) =>
             <input
                 type="number"
                 value={people ?? ''}
-                max={lanes ? lanes * 4 : 4} // Dynamisk maxgräns beroende på antal banor
+                max={lanes ? lanes * 4 : 4}
                 onChange={(e) => {
                     const value = parseInt(e.target.value);
                     if (lanes && value > lanes * 4) {

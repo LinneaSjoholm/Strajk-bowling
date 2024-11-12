@@ -4,12 +4,13 @@
     "module": "ESNext",
     "jsx": "react",
     "outDir": "./dist",
+    "rootDir": "./src",
     "esModuleInterop": true,
     "strict": true,
     "skipLibCheck": true,
     "forceConsistentCasingInFileNames": true,
     "moduleResolution": "node",
-    "baseUrl": "./src",  // Optional if you have an SRC directory
+    "baseUrl": "./src",
     "paths": {
       "*": ["node_modules/*"]
     }

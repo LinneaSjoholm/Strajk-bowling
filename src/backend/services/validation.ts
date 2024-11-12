@@ -12,7 +12,7 @@ const validateBooking = (data: BookingRequest): string | null => {
     };
 
     if(shoes.length !== people) {
-        return `Please enter exactly ${people} shoe sizes`;
+        return `Please enter ${people} shoe sizes`;
     }
 
     return null;
