@@ -1,4 +1,4 @@
-import { BookingRequest } from "../interfaces/bookingTypes";
+import { BookingRequest } from "../../frontend/interfaces/bookingTypes";
 
 const validateBooking = (data: BookingRequest): string | null => {
     const { when, lanes, people, shoes } = data;

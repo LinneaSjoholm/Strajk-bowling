@@ -1,12 +1,12 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { BookingResponse, BookingRequest } from "../interfaces/bookingTypes";
-import calculatePrice from "../components/calculatePrice"
+import calculatePrice from "./calculatePrice"
 import generateBookingId from "./bookingId";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
-import validateBooking from "../services/validation";
-import { isFutureDateTime, getMinDate, getMinTime } from "../services/dateTimeValidation";
+import validateBooking from "../../backend/services/validation";
+import { isFutureDateTime, getMinDate, getMinTime } from "../../backend/services/dateTimeValidation";
 
 const BookingForm = ({ onSubmit }: { onSubmit: (bookingData: BookingResponse) => void }) => {
     const [date, setDate] = useState<string>('');
@@ -24,8 +24,18 @@ const BookingForm = ({ onSubmit }: { onSubmit: (bookingData: BookingResponse) =>
             return;
         }
 
+        if(lanes === undefined || people === undefined) {
+            alert("Please fill in the number of lanes and people.");
+            return;
+        }
+
+        if(shoes.length !== people) {
+            alert("Please fill in the shoe sizes for all people.");
+            return;
+        }
+
         const bookingData: BookingRequest = {
-            when: `${date}T${time}`,
+            when: `${date}${time}`,
             lanes: lanes!,
             people: people!,
             shoes,

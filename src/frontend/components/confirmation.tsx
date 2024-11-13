@@ -13,7 +13,8 @@ const Confirmation = ({ booking }: ConfirmationProps) => {
             <p>Who {booking.people}</p>
             <p>Lanes {booking.lanes}</p>
             <p>Booking number {booking.id}</p>
-            <p>Price: {booking.price}</p>
+            <p>Total {booking.price}</p>
+
         </div>
     );
 }
