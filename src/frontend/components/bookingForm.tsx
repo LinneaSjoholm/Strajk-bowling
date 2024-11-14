@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { BookingResponse, BookingRequest } from "../interfaces/bookingTypes";
-import calculatePrice from "./calculatePrice"
-import generateBookingId from "./bookingId";
+import calculatePrice from "../../backend/services/calculatePrice";
+import generateBookingId from "../../backend/services/bookingId";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import validateBooking from "../../backend/services/validation";
@@ -18,46 +18,47 @@ const BookingForm = ({ onSubmit }: { onSubmit: (bookingData: BookingResponse) =>
     const navigate = useNavigate();
 
     const handleSubmit = () => {
-
-        if(!isFutureDateTime(date, time)) {
+        if (!isFutureDateTime(date, time)) {
             alert("Please select a future date and time.");
             return;
         }
-
-        if(lanes === undefined || people === undefined) {
+    
+        if (lanes === undefined || people === undefined) {
             alert("Please fill in the number of lanes and people.");
             return;
         }
-
-        if(shoes.length !== people) {
+    
+        if (shoes.length !== people) {
             alert("Please fill in the shoe sizes for all people.");
             return;
         }
-
+    
         const bookingData: BookingRequest = {
             when: `${date}${time}`,
             lanes: lanes!,
             people: people!,
             shoes,
         };
-
+    
         const validationError = validateBooking(bookingData);
         if (validationError) {
             alert(validationError);
             return;
         }
-
+    
         const finalBookingData: BookingResponse = {
             ...bookingData,
             id: generateBookingId(),
             price: calculatePrice(lanes!, people!, shoes),
             active: true
         };
-
+    
+        console.log("Submitting booking data to backend:", finalBookingData);  // <-- Debug line
+    
         onSubmit(finalBookingData);
         navigate('/confirmation', { state: { bookingData: finalBookingData } });
     };
-
+    
     return (
         <div className="booking-form">
             <label htmlFor="date">Date</label>
