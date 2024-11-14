@@ -1,0 +1,52 @@
+.App {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+.View {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+  }
+  
+  .View__iphone {
+    position: relative;
+    width: 375px;
+    height: 667px;
+    border-radius: 36px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+  }
+  
+  .View__iphone-screen {
+    width: 100%;
+    height: 100%;
+    border-radius: 36px;
+    display: flex;
+    justify-content: center;
+    background-color: var(--color-white);
+    align-items: center;
+    overflow: hidden;
+    position: relative;
+    z-index: 2;
+  }
+  
+  .View__iphone-top {
+    position: absolute;
+    width: 100%;
+    height: 30px;
+    background-color: black;
+    border-radius: 36px 36px 0 0;
+    top: 0;
+  }
+  
+  .View__iphone-bottom {
+    position: absolute;
+    width: 100%;
+    height: 30px;
+    background-color: black;
+    border-radius: 0 0 36px 36px;
+    bottom: 0;
+  }
