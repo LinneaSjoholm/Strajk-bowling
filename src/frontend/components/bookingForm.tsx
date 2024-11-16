@@ -14,106 +14,211 @@ const BookingForm = ({ onSubmit }: { onSubmit: (bookingData: BookingResponse) =>
     const [lanes, setLanes] = useState<number | undefined>(undefined);
     const [people, setPeople] = useState<number | undefined>(undefined);
     const [shoes, setShoes] = useState<number[]>([]);
+    const [errors, setErrors] = useState({
+        date: '',
+        time: '',
+        lanes: '',
+        people: '',
+        shoes: '',
+        dateTime: ''  // Nyckel för det gemensamma felmeddelandet
+    });
 
     const navigate = useNavigate();
 
     const handleSubmit = () => {
-        if (!isFutureDateTime(date, time)) {
-            alert("Please select a future date and time.");
+        let validationErrors = {
+            date: '',
+            time: '',
+            lanes: '',
+            people: '',
+            shoes: '',
+            dateTime: ''  // Nyckel för det gemensamma felmeddelandet
+        };
+
+        if (!date || !time) {
+            if (!date && !time) {
+                validationErrors.dateTime = "Please fill in both the date and the time.";  // Gemensamt felmeddelande
+            }
+            if (!date) {
+                validationErrors.date = "Please fill in the date.";
+            }
+            if (!time) {
+                validationErrors.time = "Please fill in the time.";
+            }
+        }
+
+        if (lanes === undefined) {
+            validationErrors.lanes = "Please fill in the number of lanes.";
+        }
+
+        if (people === undefined) {
+            validationErrors.people = "Please fill in the number of people.";
+        }
+
+        if (people !== undefined && shoes.length !== people) {
+            validationErrors.shoes = "Please fill in the shoe sizes for all people.";
+        }
+
+        setErrors(validationErrors);
+
+        if (Object.values(validationErrors).some((error) => error !== '')) {
             return;
         }
-    
-        if (lanes === undefined || people === undefined) {
-            alert("Please fill in the number of lanes and people.");
-            return;
-        }
-    
-        if (shoes.length !== people) {
-            alert("Please fill in the shoe sizes for all people.");
-            return;
-        }
-    
+
         const bookingData: BookingRequest = {
             when: `${date}${time}`,
             lanes: lanes!,
             people: people!,
             shoes,
         };
-    
+
         const validationError = validateBooking(bookingData);
         if (validationError) {
             alert(validationError);
             return;
         }
-    
+
         const finalBookingData: BookingResponse = {
             ...bookingData,
             id: generateBookingId(),
             price: calculatePrice(lanes!, people!, shoes),
             active: true
         };
-    
-        console.log("Submitting booking data to backend:", finalBookingData);  // <-- Debug line
-    
+
         onSubmit(finalBookingData);
         navigate('/confirmation', { state: { bookingData: finalBookingData } });
     };
-    
+
     return (
-        <div className="booking-form">
-            <label htmlFor="date">Date</label>
-            <input
-                type="date"
-                value={date}
-                onChange={(e) => setDate(e.target.value)}
-                min={getMinDate()}
-            />
+        <div className="booking__form">
+            <div className="booking-form">
+                <div className="date-time-container">
+                    <fieldset className="input-container--date-time">
+                        <legend>Date</legend>
+                        <input
+                            id="date"
+                            type="date"
+                            value={date}
+                            onChange={(e) => {
+                                setDate(e.target.value);
+                                if (e.target.value) {
+                                    setErrors((prevErrors) => ({ ...prevErrors, date: '' }));
+                                }
+                            }}
+                            min={getMinDate()}
+                            required
+                        />
+                    </fieldset>
 
-            <label htmlFor="time">Time</label>
-            <input
-                type="time"
-                value={time}
-                onChange={(e) => setTime(e.target.value)}
-                min={getMinTime()}
-            />
+                    <fieldset className="input-container--date-time">
+                        <legend>Time</legend>
+                        <input
+                            id="time"
+                            type="time"
+                            value={time}
+                            onChange={(e) => {
+                                setTime(e.target.value);
+                                if (e.target.value) {
+                                    setErrors((prevErrors) => ({ ...prevErrors, time: '' }));
+                                }
+                            }}
+                            min={getMinTime()}
+                            required
+                        />
+                    </fieldset>
+                    
+                    {/* Gemensamt felmeddelande för både Date och Time */}
+                    {(errors.date || errors.time) && (
+                        <div className="error__container__below">
+                            <p className="error__message">
+                                {errors.date && errors.time ? "Please fill in both date and time." :
+                                 errors.date || errors.time}
+                            </p>
+                        </div>
+                    )}
+                </div>
 
-            <label htmlFor="lanes">Lanes</label>
-            <input
-                type="number"
-                value={lanes ?? ''}
-                onChange={(e) => {
-                    const laneValue = parseInt(e.target.value);
-                    setLanes(laneValue > 0 ? laneValue : undefined);
-                }}
-            />
+                <fieldset className="input-container">
+                    <legend>Lanes</legend>
+                    <input
+                        id="lanes"
+                        type="number"
+                        value={lanes ?? ''}
+                        onChange={(e) => {
+                            const laneValue = parseInt(e.target.value);
+                            setLanes(laneValue > 0 ? laneValue : undefined);
+                        }}
+                        required
+                    />
+                </fieldset>
+                {errors.lanes && (
+                    <div className="error__container">
+                        <p className="error__message">{errors.lanes}</p>
+                    </div>
+                )}
 
-            <label htmlFor="people">People</label>
-            <input
-                type="number"
-                value={people ?? ''}
-                max={lanes ? lanes * 4 : 4}
-                onChange={(e) => {
-                    const value = parseInt(e.target.value);
-                    if (lanes && value > lanes * 4) {
-                        alert(`Max ${lanes * 4} people allowed for ${lanes} lanes.`);
-                    } else {
-                        setPeople(value > 0 ? value : undefined);
-                    }
-                }}
-            />
+                <fieldset className="input-container">
+                    <legend>People</legend>
+                    <input
+                        id="people"
+                        type="number"
+                        value={people ?? ''}
+                        max={lanes ? lanes * 4 : 4}
+                        onChange={(e) => {
+                            const value = parseInt(e.target.value);
+                            if (isNaN(value)) {
+                                setErrors((prevErrors) => ({ ...prevErrors, people: '' }));
+                                setPeople(undefined);
+                            } else if (lanes && value > lanes * 4) {
+                                setErrors((prevErrors) => ({
+                                    ...prevErrors,
+                                    people: `Max ${lanes * 4} people allowed for ${lanes} lanes.`,
+                                }));
+                            } else {
+                                setPeople(value > 0 ? value : undefined);
+                                setErrors((prevErrors) => ({ ...prevErrors, people: '' }));
+                            }
+                        }}
+                        required
+                    />
+                </fieldset>
+                {errors.people && (
+                    <div className="error__container">
+                        <p className="error__message">{errors.people}</p>
+                    </div>
+                )}
+            </div>
 
-            {Array.from({ length: people || 0 }).map((_, index) => (
-                <input
-                    key={index}
-                    type="number"
-                    placeholder={`Shoe size for person ${index + 1}`}
-                    onChange={(e) => {
-                        const updatedShoes = [...shoes];
-                        updatedShoes[index] = Number(e.target.value);
-                        setShoes(updatedShoes);
-                    }}
-                />
-            ))}
+            <div className="booking__page--subtitle-container">
+                <hr className="booking__page--divider" />
+                <p className="booking__page--subtitle">Shoes</p>
+                <hr className="booking__page--divider" />
+            </div>
+
+            <div className="shoe-sizes-container">
+                {Array.from({ length: people || 0 }).map((_, index) => (
+                    <fieldset key={index} className="shoe-size-wrapper">
+                        <legend>Shoe size for Person {index + 1}</legend>
+                        <input
+                            type="number"
+                            className="shoe-size-input"
+                            onChange={(e) => {
+                                const updatedShoes = [...shoes];
+                                updatedShoes[index] = Number(e.target.value);
+                                setShoes(updatedShoes);
+
+                                setErrors((prevErrors) => ({ ...prevErrors, shoes: '' }));
+                            }}
+                        />
+                    </fieldset>
+                ))}
+            </div>
+
+            {people !== undefined && errors.shoes && (
+                <div className="error__container">
+                    <p className="error__message">{errors.shoes}</p>
+                </div>
+            )}
 
             <button onClick={handleSubmit}>STRIIIIIIKE!</button>
         </div>
