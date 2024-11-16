@@ -11,3 +11,22 @@ export const getMinDate = (): string => {
 export const getMinTime = (): string => {
     return new Date().toTimeString().slice(0, 5);
 };
+
+export const formatDateTime = (dateTime: string): string => {
+    const dateObj = new Date(dateTime);
+
+    if (isNaN(dateObj.getTime())) {
+        return 'Invalid date';
+    }
+
+    const options: Intl.DateTimeFormatOptions = { 
+        month: 'short', 
+        day: 'numeric',
+        hour: 'numeric',
+        minute: 'numeric',
+        hour12: false
+    };
+
+    const formattedDate = dateObj.toLocaleDateString('sv-SE', options);
+    return formattedDate.replace('nov.', 'nov,');
+};

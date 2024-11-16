@@ -20,7 +20,7 @@ const BookingForm = ({ onSubmit }: { onSubmit: (bookingData: BookingResponse) =>
         lanes: '',
         people: '',
         shoes: '',
-        dateTime: ''  // Nyckel för det gemensamma felmeddelandet
+        dateTime: ''
     });
 
     const navigate = useNavigate();
@@ -32,12 +32,12 @@ const BookingForm = ({ onSubmit }: { onSubmit: (bookingData: BookingResponse) =>
             lanes: '',
             people: '',
             shoes: '',
-            dateTime: ''  // Nyckel för det gemensamma felmeddelandet
+            dateTime: ''
         };
 
         if (!date || !time) {
             if (!date && !time) {
-                validationErrors.dateTime = "Please fill in both the date and the time.";  // Gemensamt felmeddelande
+                validationErrors.dateTime = "Please fill in both the date and the time.";
             }
             if (!date) {
                 validationErrors.date = "Please fill in the date.";
@@ -65,8 +65,15 @@ const BookingForm = ({ onSubmit }: { onSubmit: (bookingData: BookingResponse) =>
             return;
         }
 
+        const combinedDateTime = `${date}T${time}`;
+
+        if (isNaN(new Date(combinedDateTime).getTime())) {
+        alert("Invalid date or time format");
+        return;
+        }
+
         const bookingData: BookingRequest = {
-            when: `${date}${time}`,
+            when: combinedDateTime,
             lanes: lanes!,
             people: people!,
             shoes,
@@ -127,7 +134,6 @@ const BookingForm = ({ onSubmit }: { onSubmit: (bookingData: BookingResponse) =>
                         />
                     </fieldset>
                     
-                    {/* Gemensamt felmeddelande för både Date och Time */}
                     {(errors.date || errors.time) && (
                         <div className="error__container__below">
                             <p className="error__message">
@@ -137,25 +143,6 @@ const BookingForm = ({ onSubmit }: { onSubmit: (bookingData: BookingResponse) =>
                         </div>
                     )}
                 </div>
-
-                <fieldset className="input-container">
-                    <legend>Lanes</legend>
-                    <input
-                        id="lanes"
-                        type="number"
-                        value={lanes ?? ''}
-                        onChange={(e) => {
-                            const laneValue = parseInt(e.target.value);
-                            setLanes(laneValue > 0 ? laneValue : undefined);
-                        }}
-                        required
-                    />
-                </fieldset>
-                {errors.lanes && (
-                    <div className="error__container">
-                        <p className="error__message">{errors.lanes}</p>
-                    </div>
-                )}
 
                 <fieldset className="input-container">
                     <legend>People</legend>
@@ -185,6 +172,25 @@ const BookingForm = ({ onSubmit }: { onSubmit: (bookingData: BookingResponse) =>
                 {errors.people && (
                     <div className="error__container">
                         <p className="error__message">{errors.people}</p>
+                    </div>
+                )}
+
+                <fieldset className="input-container">
+                    <legend>Lanes</legend>
+                    <input
+                        id="lanes"
+                        type="number"
+                        value={lanes ?? ''}
+                        onChange={(e) => {
+                            const laneValue = parseInt(e.target.value);
+                            setLanes(laneValue > 0 ? laneValue : undefined);
+                        }}
+                        required
+                    />
+                </fieldset>
+                {errors.lanes && (
+                    <div className="error__container">
+                        <p className="error__message">{errors.lanes}</p>
                     </div>
                 )}
             </div>
