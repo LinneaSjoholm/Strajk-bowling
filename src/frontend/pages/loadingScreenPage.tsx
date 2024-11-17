@@ -1,5 +1,5 @@
 import React from "react";
-import { useNavigate } from 'react-router-dom';
+import { useNavigate } from "react-router-dom";
 import "../styles/LoadingScreen.css";
 import { motion } from "framer-motion";
 

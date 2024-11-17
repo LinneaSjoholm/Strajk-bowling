@@ -1,5 +1,9 @@
 .booking__page--container {
-    margin-top: 50px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    height: 100vh;
 }
 
 .booking__page--title {
@@ -14,6 +18,7 @@
 .booking__page--image {
     width: 76px;
     height: 110px;
+    margin-top: 40px;
 }
 
 .booking__page--subtitle-container {

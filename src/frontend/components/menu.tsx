@@ -1,7 +1,7 @@
-import React from 'react';
+import React from "react";
 import Navbar from "../components/navBar";
-import { Link } from 'react-router-dom';
-import '../styles/menu.css';
+import { Link } from "react-router-dom";
+import "../styles/menu.css";
 
 const Menu = () => {
   const [isMenuOpen, setIsMenuOpen] = React.useState(false);

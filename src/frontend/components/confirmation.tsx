@@ -1,5 +1,5 @@
-import React from 'react';
-import { BookingResponse } from '../interfaces/bookingTypes';
+import React from "react";
+import { BookingResponse } from "../interfaces/bookingTypes";
 import { formatDateTime } from "../../backend/services/dateTimeValidation"
 
 interface ConfirmationProps {
