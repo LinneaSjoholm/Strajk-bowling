@@ -1,0 +1,196 @@
+.booking__page--container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    height: 100vh;
+}
+
+.booking__page--title {
+    font-size: 3.75rem;
+    letter-spacing: 0.3rem;
+    margin: 0;
+    font-weight: 400;
+    line-height: 72px;
+    text-align: center;
+}
+
+.booking__page--image {
+    width: 76px;
+    height: 110px;
+    margin-top: 40px;
+}
+
+.booking__page--subtitle-container {
+    display: flex;
+    align-items: center; 
+    justify-content: center; 
+    width: 100%;
+    margin: 0;
+}
+
+.booking__page--divider {
+    border: none;
+    border-top: 2px solid #441D81; 
+    flex-grow: 1; 
+    margin: 0 10px; 
+}
+
+.booking__page--subtitle {
+    font-size: 1.5rem;
+    font-weight: 400;
+    text-transform: uppercase;
+}
+
+.booking-form {
+    display: flex;
+    flex-direction: column;
+    gap: 16px; 
+}
+
+fieldset {
+    display: flex;
+    position: relative;
+    margin: 0 auto;
+    gap: 16px;
+    text-transform: uppercase;
+    font-size: 0.75rem;
+}
+
+fieldset:has(input:focus) {
+    border-color: #EC315A;
+}
+
+input {
+    margin: 0;
+    padding: 0;
+    background-color: transparent;
+    border: none;  
+    font-size: 1.5rem;
+}
+
+input:focus {
+    outline: none;
+    color: var(--color-red);
+}
+
+legend {
+    font-size: 1rem;
+}
+
+fieldset:focus-within legend {
+    color: #EC315A;
+}
+
+.input-container {
+    display: flex;
+    border: 2px solid #441d81;
+    border-radius: 5px;
+}
+
+.input-container--date-time {
+    display: flex;
+    border: 2px solid #441d81;
+    border-radius: 5px;
+    margin-bottom: 20px;
+}
+
+.date-time-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    gap: 16px;
+}
+
+.error__container {
+    padding: 8px;
+    background-color: #EC315A;
+    border-radius: 4px;
+    margin: -10px auto 20px auto;
+    width: 65%;
+    text-align: center;
+}
+
+.error__container__below {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 8px;
+    background-color: #EC315A;
+    border-radius: 4px;
+    height: 30px;
+}
+
+.error__message {
+    color: var(--color-white);
+    font-size: 0.875rem;
+}
+
+input:invalid {
+    border-color: #EC315A;
+}
+
+.shoe-sizes-container {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;  
+    margin-bottom: 20px;
+}
+
+.shoe-size-input:focus {
+    border-color: #441D81;     
+    outline: none;             
+}
+
+.shoe-size-wrapper {
+    border: 2px solid #441d81;
+    border-radius: 4px;
+}
+
+button {
+    margin-left: auto;
+    margin-right: auto;
+    display: block;
+}
+
+@media (max-width: 480px) {
+    .booking-form {
+        margin: 0;
+    }
+
+    .booking__page--title {
+        margin-top: 10px;
+    }
+
+    .booking__page--subtitle {
+        font-size: 1.5rem;
+    }
+
+    .date-time-container {
+        flex-direction: row;
+    }
+
+    .input-container--date-time {
+        margin: 0 5px 0 5px;
+        padding: 10px;
+    }
+
+    button {
+        padding: 8px 16px;
+    }
+
+    .date-time-container {
+        flex-direction: row;
+        margin: 0;
+    }
+
+    .error__container {
+        margin-top: 2px;
+        width: 70%;
+    }
+
+    .error__container__below {
+        margin: 10px 0 0 0;
+    }
+}

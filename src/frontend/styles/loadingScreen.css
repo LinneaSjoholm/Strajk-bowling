@@ -1,0 +1,50 @@
+.loading__screen {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 0;
+}
+
+img {
+    display: block;
+    margin: 0 auto;
+    width: 50%;
+    height: 50%;
+    cursor: pointer;
+}
+
+.loading__screen-title {
+    margin: 0;
+    font-weight: 400;
+    font-size: 5rem;
+    line-height: 96px;
+    letter-spacing: 0.3rem;
+}
+
+.loading__screen-body {
+    margin: 0;
+    font-weight: 400;
+    font-size: 1.25rem;
+    line-height: 23.46px;
+    letter-spacing: 0.43rem;
+}
+
+@media (max-width: 480px) {
+
+    img {
+        display: block;
+        margin: 0 auto;
+        width: 50%;
+        height: 50%;
+        cursor: pointer;
+    }
+
+    .loading__screen-title {
+        display: block;
+        margin: 0 auto;
+        font-weight: 400;
+        font-size: 3.75rem;
+        line-height: 72px;
+    }
+}

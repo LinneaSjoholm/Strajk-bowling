@@ -8,6 +8,8 @@
   --color-white: #FFF4F1;
   --color-red: #EC315A;
   --color-purple: #441D81; 
+  --color-dark: #1C1919;
+
   --font-title: "Bebas Neue", sans-serif;
   --font-body: "Work Sans", sans-serif;
   
@@ -20,10 +22,13 @@
 
 body {
   margin: 0;
+  padding: 0;
+  background-color: var(--color-white);
   display: flex;
-  place-items: center;
-  min-width: 320px;
-  min-height: 100vh;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100vh;
 }
 
 h1 {
@@ -54,6 +59,7 @@ button {
   border: none;
   padding: 20px;
   cursor: pointer;
+  font-size: 1.5rem;
 }
 
 input[type="number"]::-webkit-outer-spin-button,
