@@ -1,9 +1,3 @@
-.booking__page {
-    width: 100%;
-    height: 100vh;
-    margin: 0 auto;
-}
-
 .booking__page--container {
     margin-top: 50px;
 }
@@ -109,7 +103,7 @@ fieldset:focus-within legend {
     background-color: #EC315A;
     border-radius: 4px;
     margin: -10px auto 20px auto;
-    width: 60%;
+    width: 65%;
     text-align: center;
 }
 
