@@ -1,6 +1,7 @@
 .booking__page {
     width: 100%;
     height: 100vh;
+    margin: 0 auto;
 }
 
 .booking__page--container {
@@ -13,6 +14,7 @@
     margin: 0;
     font-weight: 400;
     line-height: 72px;
+    text-align: center;
 }
 
 .booking__page--image {
@@ -96,9 +98,10 @@ fieldset:focus-within legend {
 
 .date-time-container {
     display: flex;
-    flex-direction: row; 
-    justify-content: center;
     flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    gap: 16px;
 }
 
 .error__container {
@@ -106,26 +109,23 @@ fieldset:focus-within legend {
     background-color: #EC315A;
     border-radius: 4px;
     margin: -10px auto 20px auto;
-    width: 100%;
-    box-sizing: border-box;
+    width: 60%;
+    text-align: center;
 }
 
 .error__container__below {
+    display: flex;
+    justify-content: center;
+    align-items: center;
     padding: 8px;
     background-color: #EC315A;
     border-radius: 4px;
-    width: 70%;
-    box-sizing: border-box;
-    margin-top: 10px;
+    height: 30px;
 }
 
 .error__message {
     color: var(--color-white);
     font-size: 0.875rem;
-}
-
-.error__container--top {
-    background-color: blue;
 }
 
 input:invalid {
@@ -150,7 +150,9 @@ input:invalid {
 }
 
 button {
-    margin-bottom: 20px;
+    margin-left: auto;
+    margin-right: auto;
+    display: block;
 }
 
 @media (max-width: 480px) {
@@ -186,7 +188,7 @@ button {
 
     .error__container {
         margin-top: 2px;
-        width: 80%;
+        width: 70%;
     }
 
     .error__container__below {

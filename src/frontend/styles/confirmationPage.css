@@ -10,4 +10,37 @@
 .confirmation__title {
     margin: 10px 0 -5px 0;
     font-size: 3.75rem;
+    text-align: center;
+}
+
+.fieldset__confirmation {
+    border-radius: 4px;
+    border: 1px solid #441D81;
+    padding: 12px;
+    margin: 0;
+    font-size: 1rem;
+}
+
+.total__container {
+    display: flex;             
+    justify-content: space-between; 
+    align-items: center;     
+    border: 1px solid #EC315A;
+    padding: 12px;          
+    margin-top: 50px;
+}
+
+.confirmation__context {
+    font-size: 1rem;
+    margin: 0;
+    padding: 0;
+}
+
+.total {
+    font-weight: bold;
+    color: var(--color-red);
+}
+
+.price {
+    color: var(--color-red);
 }

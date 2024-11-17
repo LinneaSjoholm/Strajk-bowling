@@ -145,7 +145,26 @@ const BookingForm = ({ onSubmit }: { onSubmit: (bookingData: BookingResponse) =>
                 </div>
 
                 <fieldset className="input-container">
-                    <legend>People</legend>
+                    <legend>Number of lanes</legend>
+                    <input
+                        id="lanes"
+                        type="number"
+                        value={lanes ?? ''}
+                        onChange={(e) => {
+                            const laneValue = parseInt(e.target.value);
+                            setLanes(laneValue > 0 ? laneValue : undefined);
+                        }}
+                        required
+                    />
+                </fieldset>
+                {errors.lanes && (
+                    <div className="error__container">
+                        <p className="error__message">{errors.lanes}</p>
+                    </div>
+                )}
+
+                <fieldset className="input-container">
+                    <legend>Number of awesome bowlers</legend>
                     <input
                         id="people"
                         type="number"
@@ -175,24 +194,6 @@ const BookingForm = ({ onSubmit }: { onSubmit: (bookingData: BookingResponse) =>
                     </div>
                 )}
 
-                <fieldset className="input-container">
-                    <legend>Lanes</legend>
-                    <input
-                        id="lanes"
-                        type="number"
-                        value={lanes ?? ''}
-                        onChange={(e) => {
-                            const laneValue = parseInt(e.target.value);
-                            setLanes(laneValue > 0 ? laneValue : undefined);
-                        }}
-                        required
-                    />
-                </fieldset>
-                {errors.lanes && (
-                    <div className="error__container">
-                        <p className="error__message">{errors.lanes}</p>
-                    </div>
-                )}
             </div>
 
             <div className="booking__page--subtitle-container">

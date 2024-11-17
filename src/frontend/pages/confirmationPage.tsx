@@ -3,6 +3,7 @@ import { useLocation, useNavigate } from "react-router-dom";
 import Confirmation from "../components/confirmation";
 import { BookingResponse } from "../interfaces/bookingTypes";
 import "../styles/confirmationPage.css";
+import Menu from "../components/menu";
 
 interface LocationState {
     bookingData: BookingResponse;
@@ -21,6 +22,7 @@ const ConfirmationPage = () => {
 
     return (
         <div className="confirmation__page">
+            <Menu />
             <div className="confirmation__container">
             <img className="booking__page--image" src="Strajk-logo.png" alt="Strajk logo" />
             <h1 className="confirmation__title">See you soon!</h1>

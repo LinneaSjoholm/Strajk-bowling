@@ -19,29 +19,31 @@ const Confirmation = ({ booking }: ConfirmationProps) => {
 
             <fieldset className="fieldset__confirmation">
                 <legend>When</legend>
-                <p>{formattedDateTime}</p>
+                <p className="confirmation__context">{formattedDateTime}</p>
             </fieldset>
 
             <fieldset className="fieldset__confirmation">
                 <legend>Who</legend>
-                <p>{booking.people}</p>
+                <p className="confirmation__context">{booking.people} pers</p>
             </fieldset>
 
             <fieldset className="fieldset__confirmation">
                 <legend>Lanes</legend>
-                <p>{booking.lanes}</p>
+                <p className="confirmation__context">{booking.lanes}</p>
             </fieldset>
 
             <fieldset className="fieldset__confirmation">
                 <legend>Booking number</legend>
-                <p>{booking.id}</p>
+                <p className="confirmation__context">{booking.id}</p>
             </fieldset>
 
-            <fieldset className="fieldset__total">
-                <legend>Total</legend>
-                <p>{booking.price}</p>
-            </fieldset>
+            <div className="total__container">
+                <p className="total"><strong>total</strong></p>
+                <p className="price">{booking.price}sek</p>
+            </div>
+
         </div>
+
     );
 }
 
