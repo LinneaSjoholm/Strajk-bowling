@@ -88,47 +88,35 @@ fieldset:focus-within legend {
     border-radius: 5px;
 }
 
+.date-time-container {
+    display: flex;
+    gap: 16px;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    margin-bottom: 20px;
+}
+
 .input-container--date-time {
     display: flex;
     border: 2px solid #441d81;
     border-radius: 5px;
-    margin-bottom: 20px;
+    flex: 1;
 }
 
-.date-time-container {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    align-items: center;
-    gap: 16px;
-}
-
-.error__container {
-    padding: 8px;
-    background-color: #EC315A;
-    border-radius: 4px;
-    margin: -10px auto 20px auto;
-    width: 65%;
-    text-align: center;
-}
-
-.error__container__below {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding: 8px;
-    background-color: #EC315A;
-    border-radius: 4px;
-    height: 30px;
-}
-
-.error__message {
+.error-message {
     color: var(--color-white);
-    font-size: 0.875rem;
+    padding: 10px;
+    border-radius: 5px;
+    font-size: 1rem;
+    text-align: center;
+    position: relative;
+    top: -30px;
+    background-color: var(--color-red);
 }
 
 input:invalid {
-    border-color: #EC315A;
+    border-color: var(--color-red);
 }
 
 .shoe-sizes-container {

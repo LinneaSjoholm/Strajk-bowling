@@ -8,8 +8,13 @@ export const getMinDate = (): string => {
     return new Date().toISOString().split('T')[0];
 };
 
-export const getMinTime = (): string => {
-    return new Date().toTimeString().slice(0, 5);
+export const getMinTime = (selectedDate?: string): string => {
+    const today = new Date().toISOString().split('T')[0];
+
+    if (selectedDate === today) {
+        return new Date().toTimeString().slice(0, 5);
+    }
+    return "00:00"; 
 };
 
 export const formatDateTime = (dateTime: string): string => {

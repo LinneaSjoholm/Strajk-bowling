@@ -12,7 +12,7 @@ interface LocationState {
 const ConfirmationPage = () => {
     const location = useLocation();
     const navigate = useNavigate();
-    const booking = (location.state as LocationState)?.bookingData;
+    const booking = (location.state as LocationState)?.bookingData || null;
 
     const handleGoBack = () => {
         navigate('/booking');
